@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI Use Cases – Discovery Bundle Dashboard</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --primary: #1f3a5f;
+    --primary-light: #2d5a8a;
+    --accent: #4a90e2;
+    --text: #1a2238;
+    --text-muted: #5b6478;
+    --border: #e3e8f0;
+    --tag-bg: #eef3fb;
+    --tag-text: #1f3a5f;
+    --shadow: 0 2px 8px rgba(31, 58, 95, 0.06);
+    --shadow-hover: 0 6px 20px rgba(31, 58, 95, 0.12);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 28px 32px; box-shadow: var(--shadow); }
+  .header-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 6px; }
+  header h1 { margin: 0 0 4px 0; font-size: 26px; font-weight: 600; }
+  header p { margin: 0; opacity: 0.85; font-size: 14px; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 24px 32px 60px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .stat { background: var(--card); border-radius: 10px; padding: 18px 20px; box-shadow: var(--shadow); border-left: 4px solid var(--accent); }
+  .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+  .filters { background: var(--card); border-radius: 12px; padding: 22px 24px; box-shadow: var(--shadow); margin-bottom: 24px; }
+  .filter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 16px; }
+  @media (max-width: 800px) { .filter-row { grid-template-columns: 1fr; } }
+  .filter-group h3 { margin: 0 0 10px 0; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { background: var(--tag-bg); color: var(--tag-text); padding: 7px 14px; border-radius: 16px; font-size: 13px; cursor: pointer; border: 1.5px solid transparent; transition: all 0.15s; user-select: none; display: inline-flex; align-items: center; gap: 6px; }
+  .chip:hover { background: #dde6f3; }
+  .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .chip .count { font-size: 11px; opacity: 0.7; background: rgba(0,0,0,0.05); padding: 1px 6px; border-radius: 8px; }
+  .chip.active .count { background: rgba(255,255,255,0.2); opacity: 1; }
+  .search-and-actions { display: flex; gap: 12px; align-items: center; border-top: 1px solid var(--border); padding-top: 16px; }
+  .search { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.15s; }
+  .search:focus { border-color: var(--accent); }
+  .btn-reset { background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 10px 18px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+  .btn-reset:hover { border-color: var(--primary); color: var(--primary); }
+  .result-info { margin-bottom: 16px; color: var(--text-muted); font-size: 14px; }
+  .result-info strong { color: var(--primary); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border-radius: 12px; padding: 22px; box-shadow: var(--shadow); transition: all 0.2s; border: 1px solid var(--border); display: flex; flex-direction: column; }
+  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tag { font-size: 11px; padding: 3px 10px; border-radius: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3px; }
+  .tag-abt { background: #eef3fb; color: #1f3a5f; }
+  .tag-art { background: #f0f7ee; color: #2d6a3e; }
+  .card-section { margin-bottom: 12px; }
+  .card-section-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 4px; }
+  .card-problem { font-size: 14px; color: var(--text); line-height: 1.5; }
+  .card-solution { font-size: 15px; font-weight: 600; color: var(--primary); line-height: 1.4; }
+  .empty { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted); background: var(--card); border-radius: 12px; }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+  footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 40px; padding: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Discovery Bundle · Business Workshop</div>
+  <h1>KI Use Cases aus dem Discovery Bundle</h1>
+  <p>Uebersicht der im Business Workshop identifizierten KI-Anwendungsfaelle. Filtere nach Abteilung und Use Case Art, um relevante Use Cases zu entdecken.</p>
+</header>
+
+<div class="container">
+
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Use Cases gesamt</div><div class="stat-value" id="stat-total">-</div></div>
+    <div class="stat"><div class="stat-label">Abteilungen</div><div class="stat-value" id="stat-abt">-</div></div>
+    <div class="stat"><div class="stat-label">Use Case Arten</div><div class="stat-value" id="stat-art">-</div></div>
+    <div class="stat"><div class="stat-label">Aktuell angezeigt</div><div class="stat-value" id="stat-shown">-</div></div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-row">
+      <div class="filter-group">
+        <h3>Abteilung</h3>
+        <div class="chips" id="chips-abt"></div>
+      </div>
+      <div class="filter-group">
+        <h3>Use Case Art</h3>
+        <div class="chips" id="chips-art"></div>
+      </div>
+    </div>
+    <div class="search-and-actions">
+      <input type="text" class="search" id="search" placeholder="In Problem oder KI-Loesung suchen...">
+      <button class="btn-reset" id="reset">Filter zuruecksetzen</button>
+    </div>
+  </div>
+
+  <div class="result-info" id="result-info"></div>
+  <div class="cards" id="cards"></div>
+
+</div>
+
+<footer>
+  KI Use Cases &middot; Quelle: Discovery Bundle / Business Workshop &middot; Stand: <span id="updated"></span>
+</footer>
+
+<script>
+const USE_CASES = [
+{
+"p": "Standortanalysen erfordern manuelles Zusammenführen vieler Quellen und verzögern Entscheidungen",
+"l": "Standortanalyse-KI: Bündelt Standortdaten aus verschiedenen Quellen automatisch und liefert eine konsolidierte Entscheidungsgrundlage für Standortwahl",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Markt- und Branchentrends werden nicht systematisch beobachtet und sind mühsam zu recherchieren",
+"l": "Trend-Monitoring-Agent: KI beobachtet kontinuierlich Markt- und Branchentrends, kuratiert relevante News und liefert tägliche, konsolidierte Briefings",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Verträge werden manuell geprüft, kritische Klauseln, Risiken und Fristen werden übersehen, Prüfungen verzögern sich",
+"l": "KI-Vertragscheck: Analysiert Verträge automatisch, identifiziert Risiken, Klauseln und Fristen",
+"abt": "Recht, Compliance & Risiko",
+"art": "Dokumentenmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Reisekosten werden manuell geprüft, Betrugsversuche und Unregelmäßigkeiten sind schwer erkennbar",
+"l": "Expense-Fraud-Checker: KI prüft Belege, erkennt Muster und Auffälligkeiten und schlägt Entscheidungen vor",
+"abt": "Finanzen & Controlling",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Dezember 2025"
+},
+{
+"p": "ESG-Daten stammen aus vielen Quellen, Reporting ist manuell, intransparent und fehleranfällig",
+"l": "KI-gestütztes ESG-Reporting: Aggregiert Nachhaltigkeitsdaten aus verschiedenen Quellen automatisiert und erstellt prüfbare Berichte",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Gesetzes- und Regulierungsänderungen sind schwer zu überblicken, Risiko von Verstößen und Sanktionen steigt",
+"l": "Regulatorik-Monitor: KI überwacht Gesetzes- und Regulierungsänderungen, bewertet Relevanz und alarmiert betroffene Bereiche",
+"abt": "Recht, Compliance & Risiko",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Politische Entwicklungen und regulatorische Veränderungen müssen engmaschig beobachtet und eingeordnet werden; manuelle Recherche und Quellverdichtung sind sehr aufwändig",
+"l": "Public-Affairs-Research-Agent: KI beobachtet die politische Landschaft, verdichtet relevante Quellen automatisch und erstellt konsolidierte Policy-Briefings inklusive Einordnung",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Tägliche Content-Produktion für TV- und Streaming-Plattformen ist manuell aufwändig, schwer personalisierbar und kaum skalierbar",
+"l": "KI-Redakteur für Medien-Content: Erstellt personalisierte Inhalte und Layouts für TV- und Streaming-Plattformen und reichert sie mit Chatbot-Interaktion und Zuschauer-Alerts an",
+"abt": "Marketing & Kommunikation",
+"art": "Content & Kreation",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Projektkennzahlen werden manuell gesammelt, Auswertung und Prognosen sind lückenhaft und ungenau",
+"l": "KI-Projektcontrolling: Konsolidiert Projektkennzahlen aus Quellsystemen automatisch und erstellt Auswertungen sowie Prognosen",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Daten werden manuell in Excel gepflegt und visualisiert, mit hoher Fehlerquote und langsamen Auswertungen",
+"l": "Automatisiertes Reporting-Dashboard: KI zieht Daten aus Quellsystemen, visualisiert sie laufend und reduziert manuelle Excel-Pflege",
+"abt": "IT & Daten",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Produkte und Rabattaktionen aus PDF-Dokumenten werden händisch abgetippt, die Übertragung in tabellarische Übersichten ist langsam und fehleranfällig",
+"l": "PDF-Extraktions-Agent: KI liest Produkte und Rabattaktionen direkt aus PDF-Dokumenten aus und überführt sie nach Produktsegmenten strukturiert in eine Excel-Übersicht",
+"abt": "IT & Daten",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Wareneingänge werden manuell kontrolliert, Falschlieferungen und Qualitätsmängel fallen spät oder gar nicht auf",
+"l": "Smarte Wareneingangskontrolle: KI prüft Lieferungen anhand von Bild- und Bestelldaten und meldet Abweichungen sofort",
+"abt": "Operations & Produktion",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Lieferantenperformance wird unregelmäßig und subjektiv bewertet, Risiken werden zu spät erkannt",
+"l": "KI-Lieferantenscoring: Wertet Performance-Daten kontinuierlich aus und identifiziert Risikolieferanten frühzeitig",
+"abt": "Einkauf",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Eingehende Lieferantenangebote werden manuell erfasst und verglichen, zeitintensiv und fehleranfällig",
+"l": "KI-gestützter Angebotsvergleich: Erfasst Lieferantenangebote automatisch und stellt Konditionen vergleichbar gegenüber",
+"abt": "Einkauf",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Rechnungen und Belege werden manuell erfasst und geprüft, mit hohen Personalkosten und hoher Fehlerquote",
+"l": "Automatisierte Belegverarbeitung: KI erfasst Rechnungen und Belege per OCR, prüft sie und gleicht sie mit Bestellungen ab",
+"abt": "Finanzen & Controlling",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Reise- und Stundenbudgets werden manuell zugeordnet, fehleranfällig und wenig transparent",
+"l": "Budget-Assistent: KI ordnet Reise- und Stundenbudgets automatisch zu und schafft Transparenz über den Verbrauch",
+"abt": "Finanzen & Controlling",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Eingehende Rechnungen werden manuell als solche erkannt, extrahiert und an das Buchhaltungstool bzw. die zuständige Stelle weitergeleitet – ein mehrstufiger Prozess mit Medienbruch, Verzögerungen und hoher Fehlerquote",
+"l": "Invoice-to-Parsing & Routing: KI erkennt eingehende Rechnungen in E-Mails automatisch, extrahiert die Inhalte und übergibt sie direkt an das richtige Buchhaltungstool oder die zuständige Stelle",
+"abt": "Finanzen & Controlling",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Portfolios werden manuell durchgerechnet, Optimierungspotenziale bleiben unentdeckt – unabhängig vom Portfoliotyp (Finanz-, Produkt- oder Kundenportfolio)",
+"l": "Portfolio-Analyse-Agent: KI analysiert Portfolios beliebigen Typs (Finanz, Produkt, Kunde) als Dokument-Crawler und identifiziert Optimierungspotenziale automatisch",
+"abt": "Abteilungsübergreifend",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Umfangreiche Geschäfts- und Finanzberichte erfordern langwierige manuelle Analyse, Abweichungen bleiben unentdeckt",
+"l": "KI-gestützte Geschäftsberichts-Analyse: Wertet umfangreiche Berichte automatisch aus und hebt Abweichungen hervor",
+"abt": "Finanzen & Controlling",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Finanz- und Kreditrisiken sind schwer einzuschätzen, traditionelle Bewertungen reagieren träge und erkennen Risiken spät",
+"l": "KI-Risikoscoring: Bewertet Finanz- und Kreditrisiken kontinuierlich anhand aktueller Marktdaten und Frühwarnsignale",
+"abt": "Finanzen & Controlling",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Mitarbeiterumfragen werden manuell ausgewertet, Muster und Handlungsfelder bleiben oft unerkannt",
+"l": "Survey Analyzer: KI wertet Mitarbeiterumfragen aus, erkennt Themencluster und schlägt konkrete Handlungsfelder vor",
+"abt": "HR & People",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Neue Mitarbeitende finden Wissen schwer, Onboarding bindet viel Zeit erfahrener Kolleg:innen",
+"l": "Onboarding-Assistent: KI beantwortet Fragen neuer Mitarbeitender und führt sie strukturiert durch die ersten Wochen",
+"abt": "HR & People",
+"art": "Wissensmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Relevante Startups, Patente und Innovationen werden zu spät entdeckt; manuelles Scouting übersieht neue Player und Technologien, die zum eigenen Branchenfokus passen",
+"l": "Innovation-Scouting-Agent: KI beobachtet kontinuierlich neue Startups, Patente und Innovationen, gleicht sie mit den eigenen Branchenthemen ab und alarmiert frühzeitig für einen proaktiven Erstkontakt",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Mitarbeitende lesen viele Newsletter und finden relevante Informationen nur schwer",
+"l": "Newsletter-Scanner: KI durchsucht abonnierte Newsletter, extrahiert relevante Inhalte und liefert personalisierte Zusammenfassungen",
+"abt": "Abteilungsübergreifend",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Markt- und Wettbewerbsdaten sind verstreut und werden selten ausgewertet, Trends und Chancen werden übersehen",
+"l": "Automatisierte Marktanalyse: KI sammelt Markt- und Wettbewerbsdaten aus verschiedenen Quellen, erkennt Trends und identifiziert Chancen",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Newslettererstellung und -optimierung ist ressourcenintensiv und wenig datengetrieben",
+"l": "KI-Newsletter-Produktion: Recherchiert Inhalte, strukturiert, designt, personalisiert, übersetzt und steuert den Versand automatisiert",
+"abt": "Marketing & Kommunikation",
+"art": "Content & Kreation",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Professionelle LinkedIn-Beiträge sind zeitintensiv und in der Qualität stark schwankend",
+"l": "LinkedIn-Writer Agent: KI erstellt qualitativ konsistente LinkedIn-Beiträge im definierten Tone-of-Voice",
+"abt": "Marketing & Kommunikation",
+"art": "Content & Kreation",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Newsletter sind generisch, sprechen Zielgruppen kaum an und haben niedrige Öffnungs- und Klickraten",
+"l": "Smart Newsletter: KI personalisiert Newsletter-Inhalte nach Branche und Kundenhistorie und steigert Öffnungs- sowie Klickraten",
+"abt": "Marketing & Kommunikation",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Marketinginhalte sind generisch, mit geringer Kundenrelevanz und niedrigen Klick- bzw. Conversion-Raten",
+"l": "Smarte Content-Personalisierung: KI passt Marketinginhalte individuell an Zielgruppen an und steigert Klick- und Conversion-Raten",
+"abt": "Marketing & Kommunikation",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Geburtstags- und Terminerinnerungen sind unregelmäßig und unpersönlich, Kundenbindungspotenziale gehen verloren",
+"l": "Automatisierte Kundenkommunikation: KI versendet personalisierte Erinnerungen zu Geburtstagen und Terminen zur Stärkung der Kundenbindung",
+"abt": "Vertrieb",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Kampagnen werden verspätet ausgewertet, Budgets ineffizient eingesetzt und Performancepotenziale bleiben ungenutzt",
+"l": "Intelligente Kampagnen-Optimierung: KI wertet Kampagnen laufend aus, schlägt Budget- und Targeting-Anpassungen vor und steigert die Performance",
+"abt": "Marketing & Kommunikation",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Aufgaben werden vergessen und Fristen verpasst mangels intelligenter, nutzerorientierter Erinnerungen",
+"l": "Smart Nudging: KI erkennt To-Do-Muster und setzt kontextbasierte Reminder",
+"abt": "Abteilungsübergreifend",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Umfangreiche Dokumente kosten Zeit und lassen Erkenntnisse leicht untergehen",
+"l": "Dokumenten-Insights: KI extrahiert aus langen Dokumenten die wichtigsten Erkenntnisse, Aufgaben und Risiken auf Knopfdruck",
+"abt": "Abteilungsübergreifend",
+"art": "Dokumentenmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Arbeitszeiten werden manuell erfasst, sind ungenau und werden als störend empfunden",
+"l": "Automatisierte Zeiterfassung: KI erfasst Arbeitszeiten anhand von Kalender- und Aufgabendaten automatisch",
+"abt": "HR & People",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Projektstatusberichte erfordern manuelles Suchen und Konsolidieren über viele Systeme",
+"l": "Statusreport-KI: Konsolidiert Projektinformationen aus verschiedenen Systemen automatisch zu einem aktuellen Statusbericht",
+"abt": "Abteilungsübergreifend",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Meeting-Ergebnisse sind unvollständig dokumentiert, Aufgaben werden nicht konsequent verfolgt",
+"l": "Meeting Companion: KI transkribiert Meetings, erstellt Protokolle und To-Dos und verfolgt deren Umsetzung",
+"abt": "Abteilungsübergreifend",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Anforderungs- und Featureinfos sind über Tools verteilt, manuelle Pflege lässt sie schnell veralten",
+"l": "Tool-Sync-Agent: Synchronisiert Anforderungs- und Featureinfos automatisch zwischen Jira, Confluence und weiteren Tools",
+"abt": "IT & Daten",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Dokumente existieren in vielen Versionen an verschiedenen Orten, Suche und Zusammenarbeit sind erschwert",
+"l": "Zentrales Wissensportal: KI-gestützte Datenbank mit semantischer Suche über alle internen Dokumente und Versionen",
+"abt": "IT & Daten",
+"art": "Wissensmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Unstrukturierte Serviceberichte verhindern das Erkennen wiederkehrender Probleme und Optimierungspotenziale",
+"l": "Serviceberichts-Analyzer: KI strukturiert unstrukturierte Serviceberichte, erkennt wiederkehrende Probleme und Verbesserungspotenziale",
+"abt": "Kundenservice",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Viele wiederkehrende Anfragen verursachen lange Support-Wartezeiten und Überlastung der Servicemitarbeitenden",
+"l": "Intelligenter Support-Chatbot: KI beantwortet wiederkehrende Kundenanfragen automatisch und entlastet das Service-Team",
+"abt": "Kundenservice",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Einfache Sachverhalte werden ständig neu erklärt, binden Ressourcen und erzeugen uneinheitliche Qualität",
+"l": "Wissensautomatisierung: KI erstellt Lehrvideos und Erklärtexte zielgruppenspezifisch und in einheitlicher Qualität",
+"abt": "Kundenservice",
+"art": "Wissensmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Service-Wissen ist über Systeme und Köpfe verteilt; Kunden warten lange auf Antworten und Service-Mitarbeitende finden Informationen nur langsam",
+"l": "Service-Wissensassistent: KI macht Service-Wissen als Chatbot direkt für Kunden zugänglich und unterstützt parallel die Service-Mitarbeitenden bei komplexen Anfragen",
+"abt": "Kundenservice",
+"art": "Wissensmanagement",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Angebotserstellung ist zeitaufwendig, fehleranfällig und erzeugt uneinheitliche Preise sowie lange Reaktionszeiten",
+"l": "Automatisierte Angebotserstellung: KI generiert kundenindividuelle Angebote auf Basis von Preisregeln und Vorlagen",
+"abt": "Vertrieb",
+"art": "Prozessautomatisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Relevante öffentliche Ausschreibungen werden zwischen vielen Tendern übersehen; manuelle Recherche ist langwierig und unvollständig",
+"l": "Tender-Scout: KI durchsucht öffentliche Ausschreibungsplattformen kontinuierlich, filtert nach Unternehmensprofil und Branche und liefert eine kuratierte Liste passender Ausschreibungen",
+"abt": "Vertrieb",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Eingehende Ausschreibungen werden inkonsistent bewertet; die Auswahl der Ausschreibungen, für die sich eine Bewerbung lohnt, ist aufwändig und subjektiv",
+"l": "Tender-Bewertungs-KI: Bewertet eingegangene Ausschreibungen automatisch nach den definierten Unternehmenskriterien (Erfolgschance, Margenziele, strategische Passung) und liefert eine fundierte Go-/No-Go-Empfehlung",
+"abt": "Vertrieb",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Kontaktdaten aus E-Mails werden manuell ins CRM übertragen, zeitaufwendig und fehleranfällig",
+"l": "Automatisierte CRM-Kontaktpflege: KI extrahiert Kontaktdaten aus E-Mails und überträgt sie strukturiert ins CRM",
+"abt": "Vertrieb",
+"art": "Datenpflege & Stammdaten",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Kontaktstammdaten veralten, Dubletten und Mehrfachpflege verhindern ein einheitliches, konsistentes Kundenbild",
+"l": "CRM-Datenpflege & Dublettenabgleich: KI erkennt Dubletten, gleicht Stammdaten ab und hält das Kundenbild aktuell",
+"abt": "Vertrieb",
+"art": "Datenpflege & Stammdaten",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Angebote sind wenig personalisiert, manuelle Anpassung kostet Zeit und senkt die Abschlussquote",
+"l": "Personalisierte Produktangebote: KI erstellt individuell zugeschnittene Angebote und steigert die Abschlussquote",
+"abt": "Vertrieb",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Kundenkommunikation findet über viele Kanäle statt (E-Mail, LinkedIn, Verträge, Dokumente); es fehlt ein zentraler Ort, an dem die gesamte historische Kommunikation pro Kontakt einsehbar ist",
+"l": "360°-Kundenakte: KI verknüpft alle Touchpoints (E-Mail, LinkedIn, Verträge, Dokumente) zu einem Kontakt und liefert eine konsolidierte, kanalübergreifende Kommunikationshistorie",
+"abt": "Vertrieb",
+"art": "Datenpflege & Stammdaten",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Vertriebsteams kennen die vielversprechendsten Leads nicht und fokussieren wenig kaufbereite Kontakte",
+"l": "Intelligente Lead-Priorisierung: KI bewertet Leads nach Kaufwahrscheinlichkeit und fokussiert Vertriebsressourcen auf vielversprechende Kontakte",
+"abt": "Vertrieb",
+"art": "Datenanalyse & Reporting",
+"quelle": "Dezember 2025"
+},
+{
+"p": "Externe Kunden möchten Termine buchen, die Verfügbarkeitsprüfung über mehrere Kalender erfolgt manuell und kostet Zeit",
+"l": "Terminbuchungs-Assistent: KI prüft alle relevanten Kalender parallel und schlägt dem Kunden direkt einen verfügbaren Zeitslot vor",
+"abt": "Abteilungsübergreifend",
+"art": "Prozessautomatisierung",
+"quelle": "Mai 2026"
+},
+{
+"p": "Eingehende Ausschreibungen müssen manuell mit Skills und Verfügbarkeit der Consultants abgeglichen werden, das Matching ist zeitaufwendig und subjektiv",
+"l": "Consultant-Matcher: KI gleicht Ausschreibungsanforderungen mit Consultant-Profilen und Verfügbarkeiten ab und schlägt das passende Team automatisch vor",
+"abt": "Vertrieb",
+"art": "Datenanalyse & Reporting",
+"quelle": "Mai 2026"
+},
+{
+"p": "Mitarbeiterplanung und Urlaubsabstimmung erfolgen manuell, Verfügbarkeiten sind nicht transparent und Engpässe werden zu spät erkannt",
+"l": "KI-Verfügbarkeitsplanung: Aggregiert Mitarbeiter-, Urlaubs- und Projektdaten und schlägt passende Slots für Termine und Projektzuteilungen automatisch vor",
+"abt": "HR & People",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Mai 2026"
+},
+{
+"p": "Social-Media-Posts müssen vor Veröffentlichung auf Richtigkeit, Markenkonformität und Fehlinformationen geprüft werden; manuelle Kontrolle ist aufwändig und uneinheitlich",
+"l": "Content-Compliance-KI: Prüft Social-Media-Posts vor Veröffentlichung auf inhaltliche Richtigkeit, Markenkonformität und potenzielle Risiken",
+"abt": "Marketing & Kommunikation",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Mai 2026"
+},
+{
+"p": "Eingehende E-Mails, Dokumente und Dateien sammeln sich unstrukturiert über Desktop, Cloud-Speicher und Postfächer; das manuelle Sortieren und Aufräumen kostet erheblich Zeit",
+"l": "Automatisierte Dateiablage: KI analysiert eingehende E-Mails und Dokumente, legt sie regelbasiert im richtigen Ordner ab und bereinigt parallel gewachsene Dateistrukturen",
+"abt": "Abteilungsübergreifend",
+"art": "Prozessautomatisierung",
+"quelle": "Mai 2026"
+},
+{
+"p": "E-Mail-Postfächer sind unstrukturiert; es ist unklar, welche Nachrichten eine Antwort erfordern und welche nur informativ sind",
+"l": "Inbox-Triage-KI: Analysiert eingehende E-Mails, clustert sie nach Inhalt und Dringlichkeit und kennzeichnet, wo eine Reaktion erforderlich ist",
+"abt": "Abteilungsübergreifend",
+"art": "Prozessautomatisierung",
+"quelle": "Mai 2026"
+}
+];
+
+const state = { abt: new Set(), art: new Set(), search: "" };
+
+function countBy(items, key) {
+  const c = {};
+  items.forEach(i => { c[i[key]] = (c[i[key]] || 0) + 1; });
+  return c;
+}
+function uniqueSorted(items, key) {
+  return [...new Set(items.map(i => i[key]))].sort((a,b) => a.localeCompare(b, 'de'));
+}
+
+function renderChips(containerId, key, stateSet) {
+  const container = document.getElementById(containerId);
+  const counts = countBy(USE_CASES, key);
+  const values = uniqueSorted(USE_CASES, key);
+  container.innerHTML = "";
+  values.forEach(val => {
+    const chip = document.createElement("div");
+    chip.className = "chip" + (stateSet.has(val) ? " active" : "");
+    chip.innerHTML = `${val} <span class="count">${counts[val]}</span>`;
+    chip.addEventListener("click", () => {
+      if (stateSet.has(val)) stateSet.delete(val); else stateSet.add(val);
+      render();
+    });
+    container.appendChild(chip);
+  });
+}
+
+function render() {
+  const search = state.search.toLowerCase().trim();
+  const filtered = USE_CASES.filter(uc => {
+    if (state.abt.size && !state.abt.has(uc.abt)) return false;
+    if (state.art.size && !state.art.has(uc.art)) return false;
+    if (search) {
+      const hay = (uc.p + " " + uc.l).toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById("stat-shown").textContent = filtered.length;
+  const info = document.getElementById("result-info");
+  if (filtered.length === USE_CASES.length) {
+    info.innerHTML = `Zeige <strong>alle ${filtered.length}</strong> Use Cases.`;
+  } else {
+    info.innerHTML = `Zeige <strong>${filtered.length}</strong> von ${USE_CASES.length} Use Cases.`;
+  }
+
+  const cards = document.getElementById("cards");
+  cards.innerHTML = "";
+  if (filtered.length === 0) {
+    cards.innerHTML = `<div class="empty"><div class="empty-icon">&#128269;</div><div>Keine Use Cases gefunden. Passe Filter oder Suchbegriff an.</div></div>`;
+    return;
+  }
+  filtered.forEach(uc => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-tags">
+        <span class="tag tag-abt">${uc.abt}</span>
+        <span class="tag tag-art">${uc.art}</span>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label">Problem</div>
+        <div class="card-problem">${uc.p}</div>
+      </div>
+      <div class="card-section">
+        <div class="card-section-label">KI-Loesung</div>
+        <div class="card-solution">${uc.l}</div>
+      </div>
+    `;
+    cards.appendChild(card);
+  });
+
+  renderChips("chips-abt", "abt", state.abt);
+  renderChips("chips-art", "art", state.art);
+}
+
+function init() {
+  document.getElementById("stat-total").textContent = USE_CASES.length;
+  document.getElementById("stat-abt").textContent = uniqueSorted(USE_CASES, "abt").length;
+  document.getElementById("stat-art").textContent = uniqueSorted(USE_CASES, "art").length;
+  document.getElementById("search").addEventListener("input", e => { state.search = e.target.value; render(); });
+  document.getElementById("reset").addEventListener("click", () => {
+    state.abt.clear(); state.art.clear(); state.search = "";
+    document.getElementById("search").value = "";
+    render();
+  });
+  const d = new Date();
+  document.getElementById("updated").textContent = d.toLocaleDateString("de-DE", {year:"numeric", month:"long", day:"numeric"});
+  render();
+}
+
+init();
+</script>
+</body>
+</html>

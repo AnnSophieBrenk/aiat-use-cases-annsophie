@@ -1,0 +1,36 @@
+# macOS / OneDrive Metadaten
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Office-Lockfiles (Excel offen halten ohne Commit-Müll)
+~$*.xlsx
+~$*.xlsm
+~$*.docx
+.~lock.*#
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Build-Artefakte (Dashboard wird aus Excel generiert; gerendertes HTML committen wir bewusst)
+# Hier nichts ignorieren – das fertige Dashboard ist Teil des Repos.
+
+# Logs
+*.log
+
+# Lokale Notizen, die nicht ins Repo gehören
+NOTES.local.md
+scratch/
