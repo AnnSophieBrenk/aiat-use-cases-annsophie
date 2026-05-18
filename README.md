@@ -2,6 +2,8 @@
 
 Strukturierte Sammlung der KI-Use-Cases aus den Discovery-Workshops von **AI at AI Factory Austria**, plus ein gerendertes Dashboard für Management und Partner.
 
+**Live-Dashboard:** https://annsophiebrenk.github.io/aiat-use-cases-annsophie/
+
 ## Inhalt
 
 | Datei | Zweck |
