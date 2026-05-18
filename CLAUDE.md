@@ -56,11 +56,22 @@ Wenn Ann-Sophie sagt "es sind neue Einträge in der Inbox" oder eine aktualisier
 - Stil aktuell: dunkelblau (`#1f3a5f`), weiße Karten, Akzent `#4a90e2`. **AI-Austria-Corporate-Look bei Überarbeitung mitdenken** (Branding/Farben/Logo konsistent halten).
 - Filter: nach `Abteilung` und `Use Case Art`, plus Volltextsuche.
 
-## 5. Tech-Stack
+## 5. Tech-Stack & Befehle
 
-- **Python 3** für die Render-Pipeline (`rebuild_dashboard.py` ist im `ki-inbox-processor.skill` enthalten – Skill-File ist ein ZIP).
+- **Python 3** für die Render-Pipeline. Eigenständiges Skript: `scripts/rebuild_dashboard.py` (gleiches HTML-Template wie im `ki-inbox-processor.skill`, der Skill bleibt für die Inbox-Verarbeitung).
 - `openpyxl` zum Lesen der Excel.
 - Skill-Backend (Claude API vs. Claude Code Skill) **noch offen** – Architektur so halten, dass beides möglich bleibt.
+
+**Makefile-Targets (Ann-Sophie nutzt diese direkt):**
+
+| Befehl | Wirkung |
+| --- | --- |
+| `make update` | Dashboard rendern → `git add` Excel + HTML → committen → pushen → Live-Seite aktualisiert sich in ~30s |
+| `make render` | Nur lokal rendern, kein Git |
+| `make setup` | Einmalig: `openpyxl` per pip installieren |
+| `make help` | Übersicht |
+
+Wenn Claude Änderungen an der Excel vornimmt (z. B. Inbox-Verarbeitung), danach **`make update` ausführen** statt manuell zu rendern/committen – das hält den Workflow für Ann-Sophie konsistent.
 
 ## 6. Wie wir zusammenarbeiten
 
@@ -80,6 +91,5 @@ Wenn Ann-Sophie sagt "es sind neue Einträge in der Inbox" oder eine aktualisier
 ## 8. Offene Punkte / TODO
 
 - Skill-Backend entscheiden (Claude API vs. Claude Code Skill).
-- Render-Pipeline aus `.skill` herausziehen oder so lassen?
 - AI-Austria-Branding für Dashboard finalisieren (Logo, Farbpalette verifizieren).
-- Auto-Trigger Excel → Dashboard (lokaler Watcher? GitHub Action? Manueller Befehl?) noch nicht festgelegt.
+- (optional) Lokaler Datei-Watcher, der `make update` bei jedem Excel-Speichern auslöst – aktuell manuell per `make update`.

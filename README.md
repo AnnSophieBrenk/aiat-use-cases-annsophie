@@ -27,6 +27,18 @@ Strukturierte Sammlung der KI-Use-Cases aus den Discovery-Workshops von **AI at 
 3. Nur **neue** Use Cases werden in **Use Cases** ergänzt; Duplikate werden gemeldet
 4. Dashboard wird neu gerendert
 
+## Schnellbefehl: Dashboard aktualisieren
+
+```bash
+make update
+```
+
+Rendert das Dashboard aus der aktuellen Excel, committet die Änderungen und pusht.
+~30 Sekunden später ist die Live-Seite aktuell.
+
+Einmalig vorher: `make setup` (installiert `openpyxl`).
+Weitere Befehle: `make help`.
+
 ## Status
 
 Prototyp / Exploration. Strukturen dürfen sich noch ändern.
