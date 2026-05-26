@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KI Use Cases – Discovery Bundle Dashboard</title>
+<title>KI Use Cases aus Bundles</title>
 <style>
   :root {
     color-scheme: light;
@@ -67,9 +67,9 @@
 <body>
 
 <header>
-  <div class="header-eyebrow">Discovery Bundle · Business Workshop</div>
-  <h1>KI Use Cases aus dem Discovery Bundle</h1>
-  <p>Uebersicht der im Business Workshop identifizierten KI-Anwendungsfaelle. Filtere nach Abteilung und Use Case Art, um relevante Use Cases zu entdecken.</p>
+  <div class="header-eyebrow">Business Workshop &middot; Discovery Bundle &middot; Playground Bundle &middot; Executive Bundle</div>
+  <h1>KI Use Cases aus Bundles</h1>
+  <p>Uebersicht der in Business Workshops und Recherchen identifizierten KI-Anwendungsfaelle. Filtere nach Abteilung und Use Case Art, um relevante Use Cases zu entdecken.</p>
 </header>
 
 <div class="container">
@@ -104,7 +104,7 @@
 </div>
 
 <footer>
-  KI Use Cases &middot; Quelle: Discovery Bundle / Business Workshop &middot; Stand: <span id="updated"></span>
+  Quelle: Business Workshops &ndash; Bundles &middot; Kontakt: Ann-Sophie Brenk (<a href="mailto:annsophie.brenk@ai-at.eu" style="color:inherit;">annsophie.brenk@ai-at.eu</a>) &middot; Stand: <span id="updated"></span>
 </footer>
 
 <script>
@@ -369,8 +369,8 @@ const USE_CASES = [
 "quelle": "Dezember 2025"
 },
 {
-"p": "Dokumente existieren in vielen Versionen an verschiedenen Orten, Suche und Zusammenarbeit sind erschwert",
-"l": "Zentrales Wissensportal: KI-gestützte Datenbank mit semantischer Suche über alle internen Dokumente und Versionen",
+"p": "Wissen ist über viele Systeme verteilt (Dokumente, Slack, Notion, Drive); Teams beantworten konkrete Fragen wie 'Was haben wir Kunde X zugesagt?' oder 'Wie lautet unsere Erstattungspolitik?' nur mit hohem Suchaufwand",
+"l": "Zentrales Wissensportal: KI-Assistent mit semantischer Suche und Q&A-Funktion über alle internen Quellen (Dokumente, Slack, Notion, Drive) – beantwortet Fragen direkt aus den eigenen Inhalten",
 "abt": "IT & Daten",
 "art": "Wissensmanagement",
 "quelle": "Dezember 2025"
@@ -383,8 +383,8 @@ const USE_CASES = [
 "quelle": "Dezember 2025"
 },
 {
-"p": "Viele wiederkehrende Anfragen verursachen lange Support-Wartezeiten und Überlastung der Servicemitarbeitenden",
-"l": "Intelligenter Support-Chatbot: KI beantwortet wiederkehrende Kundenanfragen automatisch und entlastet das Service-Team",
+"p": "Wiederkehrende FAQ- und Support-Anfragen werden manuell beantwortet, verursachen lange Wartezeiten und überlasten die Service-Mitarbeitenden",
+"l": "Intelligenter Support-Chatbot: KI beantwortet rund 70 % der wiederkehrenden FAQ- und Support-Anfragen sofort und automatisch, entlastet das Service-Team und sorgt für konsistente Antwortqualität",
 "abt": "Kundenservice",
 "art": "Kundenkommunikation & Personalisierung",
 "quelle": "Dezember 2025"
@@ -500,6 +500,433 @@ const USE_CASES = [
 "abt": "Abteilungsübergreifend",
 "art": "Prozessautomatisierung",
 "quelle": "Mai 2026"
+},
+{
+"p": "Eingehende Telefonanrufe (Terminbuchung, einfache Support-Anfragen) binden viel Mitarbeiterzeit und sind außerhalb der Geschäftszeiten nicht abgedeckt",
+"l": "Voice-Agent: KI-gestützter Sprachassistent nimmt Anrufe rund um die Uhr entgegen, qualifiziert Anfragen, bucht Termine und übernimmt Tier-1-Support",
+"abt": "Kundenservice",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "AI startup use case identification"
+},
+{
+"p": "Produktempfehlungen für Kunden werden nach Bauchgefühl ausgesprochen, ohne datengestützte Grundlage – passende Cross- und Upsell-Potenziale bleiben ungenutzt",
+"l": "Recommendation-Engine: KI analysiert Kundenverhalten und schlägt im direkten Kundenkontakt das nächstbeste Produkt automatisch vor",
+"abt": "Vertrieb",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "AI startup use case identification"
+},
+{
+"p": "Sales-Pipeline-Daten und Kundenfeedback liegen unstrukturiert in Tabellen verteilt – Muster und Anomalien bleiben unentdeckt und Handlungsoptionen sind unklar",
+"l": "Sales- & Feedback-Analyzer: KI wertet Sales-Pipeline-Daten und Kundenfeedback aus, erkennt nicht-offensichtliche Muster und Anomalien und schlägt konkrete nächste Schritte vor",
+"abt": "Vertrieb",
+"art": "Datenanalyse & Reporting",
+"quelle": "AI startup use case identification"
+},
+{
+"p": "Personalisierte Cold-Outreach-Kampagnen erfordern aufwändige Prospect-Recherche, individuell zugeschnittene Mailsequenzen und Multi-Channel-Koordination – in kleinen Teams kaum skalierbar",
+"l": "Cold-Outreach-Agent: KI recherchiert Prospects, entwirft personalisierte Mail-Sequenzen und koordiniert den Multi-Channel-Outbound automatisiert",
+"abt": "Vertrieb",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "AI startup use case identification"
+},
+{
+"p": "Lead-Bearbeitung erfordert viele manuelle Schritte – Erfassung, Qualifizierung, Scoring, CRM-Übertragung und Vertriebs-Benachrichtigung – mit Medienbrüchen und Zeitverlust",
+"l": "End-to-End-Lead-Automation: KI qualifiziert und bewertet eingehende Leads automatisch, legt sie strukturiert im CRM ab und informiert das Vertriebsteam in Echtzeit",
+"abt": "Vertrieb",
+"art": "Prozessautomatisierung",
+"quelle": "AI startup use case identification"
+},
+{
+"p": "Erstellte Angebote enthalten Fehler oder Unvollständigkeiten, die zu Nacharbeit und Risiko führen",
+"l": "Angebots-Plausibilitätscheck: KI prüft Angebote vor dem Versand auf Plausibilität, Vollständigkeit und Abweichungen",
+"abt": "Vertrieb",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Research"
+},
+{
+"p": "Kaufmännische Bedingungen in Angeboten (Anzahlung, Garantien, Rechtsform) bergen Risiken, die manuell leicht übersehen werden",
+"l": "Angebots-Konditionen-Check: KI extrahiert kaufmännische Klauseln aus Angeboten, flaggt Red-Flags und schlägt geprüfte Standardklauseln vor",
+"abt": "Vertrieb",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Research"
+},
+{
+"p": "Leads gehen verloren, weil Angebots-Follow-ups manuell nicht konsequent erfolgen",
+"l": "Voice-Agent für Angebotsnachverfolgung: KI ruft Interessenten an, erinnert an offene Angebote, erfasst Status und dokumentiert im CRM",
+"abt": "Vertrieb",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Research"
+},
+{
+"p": "Gesprächsnotizen und Next Steps aus Vertriebsgesprächen gehen verloren, das CRM wird inkonsistent gepflegt",
+"l": "Sales-Gesprächs-Companion: KI fasst Vertriebsgespräche zusammen, leitet Follow-ups ab und aktualisiert das CRM automatisch",
+"abt": "Vertrieb",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Research"
+},
+{
+"p": "Account-Informationen für Vertriebstermine fehlen oder sind verstreut, Chancen werden in Gesprächen verpasst",
+"l": "Account-Briefing-Agent: KI erstellt vor Terminen automatisch Account-Briefings inklusive Buying Signals und Wettbewerbsinformationen",
+"abt": "Vertrieb",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Nächste Schritte im CRM sind nicht klar priorisiert, Vertriebsteams agieren reaktiv statt strategisch",
+"l": "CRM-Next-Best-Action: KI empfiehlt pro Account das richtige Timing, Angebot oder Cross-sell mit Begründung",
+"abt": "Vertrieb",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Forecasts sind ungenau, Deals 'slippen' unbemerkt und korrigierende Maßnahmen kommen zu spät",
+"l": "Sales-Forecasting & Pipeline-Health-Agent: KI bewertet Deal-Gesundheit, erkennt Slip-Risiko frühzeitig und schlägt konkrete Maßnahmen vor",
+"abt": "Vertrieb",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Die Prozesskette von Angebot zu Auftrag enthält Medienbrüche, die Durchlaufzeiten bremsen und Inkonsistenzen erzeugen",
+"l": "End-to-End-Auftragsabwicklung: KI stößt Systemaktionen über die gesamte Prozesskette an, behandelt Ausnahmen und holt Freigaben ein",
+"abt": "Finanzen & Controlling",
+"art": "Prozessautomatisierung",
+"quelle": "Research"
+},
+{
+"p": "Ungewöhnliche Buchungen und Anomalien in Geschäftstransaktionen werden zu spät erkannt",
+"l": "Transaktions-Fraud-Detection: KI findet Muster-Abweichungen in Transaktionen, warnt frühzeitig und erklärt Auffälligkeiten",
+"abt": "Finanzen & Controlling",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Research"
+},
+{
+"p": "Letter-of-Credit-Dokumente sind aufwendig zu prüfen und Fehler in der Abwicklung sind teuer",
+"l": "Akkreditiv-Prüfung: KI extrahiert Bedingungen aus Letter-of-Credit-Dokumenten, gleicht sie gegen Belege ab und markiert Abweichungen",
+"abt": "Finanzen & Controlling",
+"art": "Dokumentenmanagement",
+"quelle": "Research"
+},
+{
+"p": "Das Mahnwesen ist reaktiv und schlecht priorisiert, Außenstände binden Cashflow unnötig",
+"l": "Debitorenmanagement-KI: Prognostiziert Zahlungsverhalten je Kunde, priorisiert Mahnfälle und schlägt die Next-Best-Action vor",
+"abt": "Finanzen & Controlling",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "KPI-Reports an das Management liefern Zahlen, aber wenig Handlungsorientierung – Highlights und Risiken bleiben verborgen",
+"l": "KPI-Narrativ-Generator: KI erzeugt zu KPI-Reports automatisch ein Narrativ mit Highlights, Risiken und konkreten Handlungsempfehlungen",
+"abt": "Finanzen & Controlling",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Klassische Planung ist starr, Szenarien werden nicht durchgespielt und reagieren träge auf Marktbewegungen",
+"l": "Treiberbasiertes Forecasting: KI modelliert Geschäftstreiber und rechnet Was-wäre-wenn-Szenarien für robustere Planung",
+"abt": "Finanzen & Controlling",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Kostenlecks und ineffiziente Ausgaben bleiben über lange Zeit unbemerkt",
+"l": "Kostenanomalie-Detektor: KI findet Ausreißer in Kostendaten, ordnet Ursachen zu und schlägt Einsparmaßnahmen vor",
+"abt": "Finanzen & Controlling",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Research"
+},
+{
+"p": "Der Nutzen von KI-Projekten wird nicht sauber gemessen, ROI bleibt unklar und Wertbeiträge werden nicht realisiert",
+"l": "KI-ROI-Tracking: Misst Adoption und Outcomes von KI-Projekten, verknüpft sie mit Business-KPIs und zeigt Wertbeiträge transparent auf",
+"abt": "Finanzen & Controlling",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Produkt-Roadmaps berücksichtigen Kundenfeedback zu wenig systematisch, Prioritäten basieren auf Bauchgefühl",
+"l": "Feature-Priorisierungs-Agent: KI clustert Kundenfeedback und Tickets, leitet Themen ab und priorisiert Features datengestützt für die Roadmap",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Support-Tickets enthalten wertvolle Hinweise auf Produktprobleme, die manuell selten zu Root Causes oder Feature-Vorschlägen aggregiert werden",
+"l": "Ticket-Root-Cause-Analyzer: KI erkennt Ursachen-Muster in Support-Tickets und schlägt konkrete Fixes oder Produktverbesserungen vor",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Wiederkehrende Qualitätsprobleme im Feld haben unklare Ursachen, Reklamationen und Servicefälle häufen sich",
+"l": "Felddaten-Qualitätsanalyzer: KI findet Muster in Felddaten und Logs, identifiziert Fehlerursachen und setzt Frühwarnungen",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Routinearbeit und Wissenssuche binden Führungskräften viel Zeit, Prioritäten und Follow-ups verlieren sich im Tagesgeschäft",
+"l": "Executive Task-Assistent: KI sucht und fasst Informationen zusammen, entwirft Texte, priorisiert Aufgaben und erstellt Follow-ups proaktiv",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Research"
+},
+{
+"p": "Zu viele konkurrierende Initiativen lasten Ressourcen aus, Priorisierungsentscheidungen sind nicht datengestützt",
+"l": "Portfolio-Priorisierungs-Agent: KI bewertet Value und Effort der Initiativen, modelliert Abhängigkeiten und empfiehlt eine Sequenz",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Ressourcen werden ohne datenbasierte Grundlage verteilt, Engpässe entstehen unerwartet",
+"l": "Ressourcen-Szenarienplaner: KI simuliert Kapazitäten, erkennt Engpässe in Was-wäre-wenn-Szenarien und schlägt Re-Allokationen vor",
+"abt": "Strategie & Geschäftsleitung",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Research"
+},
+{
+"p": "Werkzeuge fehlen oder verschleißen unerwartet und stoppen die Produktion",
+"l": "Werkzeug-Predictive-Maintenance: KI prognostiziert Verschleiß und Werkzeugbedarf und stößt Nachbestellungen automatisch an",
+"abt": "Operations & Produktion",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Visuelle Qualitätsprüfung in der Produktion ist langsam, inkonsistent und bindet Personal",
+"l": "Computer-Vision-Qualitätsprüfung: KI erkennt Defekte und Toleranzabweichungen auf Bildern und Videos in Echtzeit",
+"abt": "Operations & Produktion",
+"art": "Prozessautomatisierung",
+"quelle": "Research"
+},
+{
+"p": "Status und Ort einzelner Teile in der Produktion sind intransparent, die Suche bindet Zeit und Planung leidet",
+"l": "Teile-Traceability-Agent: KI konsolidiert Tracking-Signale, erkennt Engpässe und liefert Statusinformationen automatisch",
+"abt": "Operations & Produktion",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Fehlteile in der Produktion verursachen Stillstand und Eskalationsschleifen",
+"l": "Fehlteilmanagement-KI: Sagt Fehlteile voraus, erstellt Klärfälle automatisch und eskaliert proaktiv an die zuständigen Stellen",
+"abt": "Operations & Produktion",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Krisenfälle (z. B. technische Ausfälle, Notfälle) werden nicht schnell genug richtig triagiert und eskaliert",
+"l": "Krisenhotline-Voice-Agent: KI nimmt Anrufe 24/7 entgegen, triagiert die Dringlichkeit, eskaliert und protokolliert lückenlos",
+"abt": "Kundenservice",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Research"
+},
+{
+"p": "Servicestörungen werden erst nach Ausfall bearbeitet, Ressourcen werden reaktiv geplant",
+"l": "Predictive-Service-Agent: KI erkennt Frühwarnsignale, erstellt automatisch Tickets und plant Ersatzteile sowie Techniker vorab",
+"abt": "Kundenservice",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Servicepreise werden inkonsistent gesetzt und sind nicht datenbasiert, Margen schwanken",
+"l": "KI-Preisgestaltung: Empfiehlt Servicepreise und Rabatte basierend auf Marktdaten, Kundenhistorie und Benchmarks",
+"abt": "Kundenservice",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Service-Bundle-Angebote sind schwer zu standardisieren und werden uneinheitlich kalkuliert",
+"l": "Bundle-Konfigurator: KI schlägt passende Service-Pakete je Kundentyp und Anlage automatisch vor",
+"abt": "Kundenservice",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Research"
+},
+{
+"p": "Marketing-Inhalte auf Website, in Newslettern und E-Mails treffen Zielgruppen zu wenig, Zeitpunkt und Variante sind nicht optimiert",
+"l": "Cross-Channel-Personalisierung: KI segmentiert Zielgruppen, generiert kanalspezifische Varianten und optimiert die Versandzeit für höhere Conversion",
+"abt": "Marketing & Kommunikation",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Research"
+},
+{
+"p": "Messeplanung, Aufgabenverteilung und Follow-up-Bearbeitung sind chaotisch, Leads gehen verloren",
+"l": "Messestand-Orchestrator: KI plant Aufgaben und Material, erfasst Leads vor Ort und erstellt automatisierte Follow-up-Sequenzen",
+"abt": "Marketing & Kommunikation",
+"art": "Projekt- & Aufgabenmanagement",
+"quelle": "Research"
+},
+{
+"p": "Hochwertige Werbefilme sind teuer und langsam in der Produktion und schwer zu skalieren",
+"l": "KI-Werbespots: Erstellt Skripte, Storyboards und mehrere Werbespot-Varianten generativ – schnelle Kampagnen und differenzierende Inhalte",
+"abt": "Marketing & Kommunikation",
+"art": "Content & Kreation",
+"quelle": "Research"
+},
+{
+"p": "Content-Produktion für mehrere Social-Media-Kanäle inklusive Video ist teuer und schwer skalierbar",
+"l": "Social-Media-Content-Agent: KI generiert Posts, Skripte und Video-Clips in mehreren Varianten je Kanal mit konsistentem Brand",
+"abt": "Marketing & Kommunikation",
+"art": "Content & Kreation",
+"quelle": "Research"
+},
+{
+"p": "Urlaubsplanung ist konfliktanfällig und manuell, Regelprüfungen und Genehmigungen kosten viel Zeit",
+"l": "Urlaubs-Workflow-KI: Prüft Urlaubsanträge gegen Regeln, erkennt Konflikte mit anderen Abwesenheiten und automatisiert Genehmigungen",
+"abt": "HR & People",
+"art": "Prozessautomatisierung",
+"quelle": "Research"
+},
+{
+"p": "Recruiting bindet viel Zeit in der Vorauswahl, Erstgespräche werden inkonsistent dokumentiert",
+"l": "Recruiting-Screening-Agent: KI führt strukturierte Erstgespräche per Voice, bewertet Kandidaten anhand definierter Kriterien und erstellt Protokolle",
+"abt": "HR & People",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Research"
+},
+{
+"p": "Skill-Gaps und Nachfolgeplanung werden zu spät erkannt, Lernpfade sind nicht systematisch",
+"l": "Skill-Mapping-Agent: KI extrahiert Mitarbeiterskills aus Quellen, erkennt Lücken und empfiehlt individuelle Lernpfade",
+"abt": "HR & People",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research"
+},
+{
+"p": "Onboarding-Prozesse für neue Mitarbeitende sind inkonsistent, Checklisten und Reminder werden manuell gepflegt",
+"l": "Onboarding-Workflow-Automation: KI steuert Onboarding-Checklisten, Aufgaben und Reminder und liefert einen Q&A-Bot für Standardfragen",
+"abt": "HR & People",
+"art": "Prozessautomatisierung",
+"quelle": "Research"
+},
+{
+"p": "Legacy-Silos und fehlende API-Anbindung verhindern echte End-to-End-Prozesse zwischen Systemen",
+"l": "KI-Agent-Integration: Autonomer Agent bedient Tools und APIs, übergibt Daten zwischen Systemen und behandelt Ausnahmen automatisch",
+"abt": "IT & Daten",
+"art": "Prozessautomatisierung",
+"quelle": "Research"
+},
+{
+"p": "Cloud-basierte KI-Lösungen sind regulatorisch oder operativ riskant – sensible Inhalte sollen das Unternehmen nicht verlassen",
+"l": "Lokales Privacy-First-GPT: Internes LLM für Dokumentensuche, Extraktion und Zusammenfassung – DSGVO-konform und datenschutzfreundlich betrieben",
+"abt": "IT & Daten",
+"art": "Wissensmanagement",
+"quelle": "Research"
+},
+{
+"p": "Bestehende Automationen brechen still ohne Monitoring oder Eskalation, Betriebskosten und Ausfallrisiko steigen",
+"l": "Workflow-Orchestrator: KI steuert Workflows über APIs und RPA, überwacht Ausführung, eskaliert und löst Routine-Fehler self-healing",
+"abt": "IT & Daten",
+"art": "Prozessautomatisierung",
+"quelle": "Research"
+},
+{
+"p": "Incidents in komplexen IT-Landschaften dauern lange bis zur Ursachenfindung – MTTR und Downtime sind hoch",
+"l": "AIOps-Agent: KI korreliert Logs und Metriken, identifiziert Root Causes und schlägt konkrete Fix-Vorschläge vor",
+"abt": "IT & Daten",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Insolvenzrisiken bei Kunden und Lieferanten werden zu spät über offizielle Portale entdeckt",
+"l": "Insolvenz-Monitor: KI filtert und klassifiziert Meldungen aus Insolvenzportalen und priorisiert Warnungen nach Geschäftsrelevanz",
+"abt": "Recht, Compliance & Risiko",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Datenschutz- und AI-Policy-Anforderungen sind komplex, Nachweise und DSFA-Artefakte sind aufwendig zu erstellen",
+"l": "Datenschutz-Policy-Copilot: KI erstellt und prüft Policies, generiert DSFA-Artefakte und Evidence-Listen für schnellere Compliance",
+"abt": "Recht, Compliance & Risiko",
+"art": "Dokumentenmanagement",
+"quelle": "Research"
+},
+{
+"p": "Lieferantenrisiken werden nicht kontinuierlich überwacht – Sanktionen oder negative News kommen erst über Umwege ans Licht",
+"l": "Supplier-Risk-News-Monitor: KI überwacht News und Sanktionslisten zu Lieferanten und Third Parties, scort Risiken und alarmiert frühzeitig",
+"abt": "Recht, Compliance & Risiko",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research"
+},
+{
+"p": "Sensible Unternehmensdaten verlassen über E-Mails, Cloud-Uploads oder USB-Sticks unbemerkt das Unternehmen; klassische regelbasierte DLP-Systeme (Data Loss Prevention) verursachen viele Fehlalarme und übersehen kreative Datenlecks",
+"l": "DLP-Agent (Data Loss Prevention): KI erkennt sensible Daten in Echtzeit kontextbasiert, lernt aus erlaubten Zugriffs- und Übertragungsmustern und reduziert Fehlalarme deutlich",
+"abt": "Recht, Compliance & Risiko",
+"art": "Risikoanalyse & Compliance",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Cyberangriffe und Netzwerk-Anomalien werden in komplexen IT-Landschaften zu spät erkannt; signaturbasierte Tools erfassen neue Angriffsvektoren nicht",
+"l": "Network-Anomaly-Detector: KI überwacht den gesamten Netzwerkverkehr, erkennt ungewöhnliche Muster und potenzielle Cyberattacken in Echtzeit und alarmiert die Security-Verantwortlichen",
+"abt": "IT & Daten",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Physische Sicherheit in Standorten, Lagern und Produktionsstätten erfordert dauerhafte Überwachung – menschliche Aufmerksamkeit lässt nach Stunden nach und Vorfälle werden zu spät entdeckt",
+"l": "Smart-Security-System: KI überwacht Kamerafeeds rund um die Uhr, erkennt Anomalien wie Einbruch, unbefugten Zugang oder Brandgefahr und löst automatisch Benachrichtigungen sowie Notfall-Workflows aus",
+"abt": "Operations & Produktion",
+"art": "Monitoring & Frühwarnung",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Lagerbestände werden konservativ und erfahrungsbasiert gepflegt – Kapital ist unnötig gebunden und gleichzeitig kommt es bei Nachfrage-Spitzen zu Engpässen",
+"l": "Inventory-Optimierer: KI prognostiziert Nachfrage je Artikel, schlägt optimale Bestände und Replenishment-Zeitpunkte vor und reduziert Kapitalbindung bei gleichzeitiger Verfügbarkeit",
+"abt": "Operations & Produktion",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Lieferkettenflüsse sind intransparent, Verzögerungen werden zu spät erkannt und alternative Routen oder Lieferanten manuell evaluiert",
+"l": "Supply-Chain-Optimizer: KI schafft End-to-End-Transparenz über die Lieferkette, prognostiziert Risiken und schlägt automatisch alternative Routen, Lieferanten oder Mengen vor",
+"abt": "Operations & Produktion",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Die tatsächlich gelebten Prozesse weichen unbemerkt vom Soll-Prozess ab, Engpässe und Schleifen bleiben unsichtbar und Verbesserungsinitiativen treffen die falschen Stellen",
+"l": "Process-Mining-Agent: KI analysiert Event-Logs aus Geschäftssystemen und visualisiert die tatsächlichen Ist-Prozesse, Engpässe und Soll-Ist-Abweichungen",
+"abt": "Abteilungsübergreifend",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Kündigungen kommen für die Führung oft überraschend; Frühwarnsignale aus Verhalten, Performance und Stimmung werden manuell nicht systematisch ausgewertet",
+"l": "Mitarbeiter-Churn-Predictor: KI prognostiziert Kündigungsrisiken anhand von Performance-, Survey- und Aktivitätsdaten und liefert Frühwarnsignale plus konkrete Bindungsmaßnahmen",
+"abt": "HR & People",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Conversions werden klassisch Last-Click-Modellen zugeordnet – der tatsächliche Beitrag jedes Marketing- und Sales-Touchpoints bleibt unklar und Budgets werden ineffizient verteilt",
+"l": "Marketing-Attribution-Modell: KI berechnet Multi-Touch-Attribution über alle Kanäle und zeigt, welche Touchpoints welchen Anteil am Geschäftsergebnis haben",
+"abt": "Marketing & Kommunikation",
+"art": "Datenanalyse & Reporting",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Junior-Vertriebsmitarbeitende lernen primär aus Coachings nach dem Gespräch – Echtzeit-Feedback während laufender Kundengespräche fehlt",
+"l": "Sales-Live-Coach: KI hört in Vertriebsgespräche rein, schlägt Best-Practice-Antworten live vor und gibt Hinweise zu Sentiment und nächster sinnvoller Aktion",
+"abt": "Vertrieb",
+"art": "Kundenkommunikation & Personalisierung",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Management-Präsentationen verschlingen viel Zeit für Layout, Visualisierung und Storyline-Aufbau – die eigentliche inhaltliche Arbeit kommt zu kurz",
+"l": "KI-Präsentations-Generator: Erstellt aus Prompts oder Datenquellen automatisch strukturierte PowerPoint-Decks mit passendem Layout, Charts und Storyline",
+"abt": "Abteilungsübergreifend",
+"art": "Content & Kreation",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Standardverträge und Klauseln werden manuell aus Vorlagen zusammengestellt; Anpassungen an spezifische Geschäftssituationen sind zeitaufwendig und uneinheitlich",
+"l": "Vertragsentwurf-KI: Generiert Verträge und Klauseln auf Basis interner Standards und der konkreten Geschäftssituation – komplementär zum bestehenden Vertrags-Check",
+"abt": "Recht, Compliance & Risiko",
+"art": "Content & Kreation",
+"quelle": "Research (aimultiple.com)"
+},
+{
+"p": "Software-Entwicklung ist zeitaufwendig, vor allem bei Boilerplate-Code, Tests und Debugging; Wissen aus internen Codebases wird selten effizient wiederverwendet",
+"l": "Developer-Copilot: KI assistiert beim Code-Schreiben, generiert Tests, unterstützt bei Reviews und Debugging und beschleunigt Entwicklungszyklen messbar",
+"abt": "IT & Daten",
+"art": "Prozessautomatisierung",
+"quelle": "Research (aimultiple.com)"
 }
 ];
 
