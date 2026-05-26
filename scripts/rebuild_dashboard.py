@@ -20,7 +20,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KI Use Cases – Discovery Bundle Dashboard</title>
+<title>KI Use Cases aus Bundles</title>
 <style>
   :root {
     color-scheme: light;
@@ -84,9 +84,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
-  <div class="header-eyebrow">Discovery Bundle · Business Workshop</div>
-  <h1>KI Use Cases aus dem Discovery Bundle</h1>
-  <p>Uebersicht der im Business Workshop identifizierten KI-Anwendungsfaelle. Filtere nach Abteilung und Use Case Art, um relevante Use Cases zu entdecken.</p>
+  <div class="header-eyebrow">Business Workshop &middot; Discovery Bundle &middot; Playground Bundle &middot; Executive Bundle</div>
+  <h1>KI Use Cases aus Bundles</h1>
+  <p>Übersicht der in Business Workshops und Recherchen identifizierten KI-Anwendungsfälle. Filtere nach Abteilung und Use Case Art, um relevante Use Cases zu entdecken.</p>
 </header>
 
 <div class="container">
@@ -110,8 +110,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
     <div class="search-and-actions">
-      <input type="text" class="search" id="search" placeholder="In Problem oder KI-Loesung suchen...">
-      <button class="btn-reset" id="reset">Filter zuruecksetzen</button>
+      <input type="text" class="search" id="search" placeholder="In Problem oder KI-Lösung suchen...">
+      <button class="btn-reset" id="reset">Filter zurücksetzen</button>
     </div>
   </div>
 
@@ -121,7 +121,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <footer>
-  KI Use Cases &middot; Quelle: Discovery Bundle / Business Workshop &middot; Stand: <span id="updated"></span>
+  Quelle: Business Workshops &ndash; Bundles &middot; Kontakt: Ann-Sophie Brenk (<a href="mailto:annsophie.brenk@ai-at.eu" style="color:inherit;">annsophie.brenk@ai-at.eu</a>) &middot; Stand: <span id="updated"></span>
 </footer>
 
 <script>
@@ -194,7 +194,7 @@ function render() {
         <div class="card-problem">${uc.p}</div>
       </div>
       <div class="card-section">
-        <div class="card-section-label">KI-Loesung</div>
+        <div class="card-section-label">KI-Lösung</div>
         <div class="card-solution">${uc.l}</div>
       </div>
     `;
